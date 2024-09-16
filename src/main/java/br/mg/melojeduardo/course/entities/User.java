@@ -1,4 +1,4 @@
-package br.mg.melojeduardo.course.Entities;
+package br.mg.melojeduardo.course.entities;
 
 import jakarta.persistence.*;
 

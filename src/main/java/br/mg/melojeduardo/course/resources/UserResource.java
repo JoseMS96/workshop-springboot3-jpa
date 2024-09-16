@@ -1,6 +1,6 @@
 package br.mg.melojeduardo.course.resources;
 
-import br.mg.melojeduardo.course.Entities.User;
+import br.mg.melojeduardo.course.entities.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
