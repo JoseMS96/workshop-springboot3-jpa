@@ -1,5 +1,6 @@
 package br.mg.melojeduardo.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -17,7 +18,9 @@ public class Category implements Serializable {
     private Long id;
     private String name;
 
-    @Transient
+    // This JsonIgnore needs to be on the side of the relationship where you DON'T WANT the related entity to show, so here in category won't show all products of the category, but in product it will show all categories of the product
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
 
     public Category () {

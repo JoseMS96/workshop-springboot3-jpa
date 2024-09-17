@@ -21,7 +21,6 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
-    // This JsonIgnore needs to be on the 1 side in one-to-many relationships so that it avoids lazy loading issues where the entire list of many is loaded by default
     @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
