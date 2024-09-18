@@ -26,6 +26,11 @@ public class Product implements Serializable {
             joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
+//Set garante que não haverão repetição do mesmo item
+
     public Product() {
 
     }
@@ -80,6 +85,18 @@ public class Product implements Serializable {
 
     public Set<Category> getCategories() {
         return categories;
+    }
+
+    // O get foi direito nas ordens pq em uma aplicação de mundo real, não faz sentido trazer todos os itens de pedidos relacionados a um produto
+    // mas faz sentido trazer todos as ordens relacionadas a um produto
+    // Impede que o Produto chame o OrderItem e fique no loop infinito crashador de cpu da FAI
+    @JsonIgnore // Válido ressaltar que o getOrders ainda pode ser usado no projeto, apesar de ser ignorado como default os dados ainda podem ser utilizados
+    public Set<Order> getOrders() {
+        Set<Order> set = new HashSet<>();
+        for (OrderItem x : items) {
+            set.add(x.getOrder());
+        }
+        return set;
     }
 
     @Override
