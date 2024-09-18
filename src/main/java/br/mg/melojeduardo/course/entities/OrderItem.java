@@ -32,6 +32,10 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+    public Double getSubtotal() {
+        return price * quantity;
+    }
+
     @JsonIgnore // Impede que o OrderItem chame o Order e fique no loop infinito crashador de cpu da FAI
     public Order getOrder() {
         return id.getOrder();
